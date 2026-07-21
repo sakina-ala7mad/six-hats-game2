@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Six Hats — Team Thinking Game</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme="dark">
+
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+  <!-- ===== INTRO MODAL (six hats explanation) ===== -->
+  <div id="introModal" class="modal hidden">
+    <div class="modal-card">
+      <h2>🎩 The Six Thinking Hats</h2>
+      <p class="muted">Each hat is a different way of thinking about a problem. Wear one at a time.</p>
+      <div id="introHatsList" class="intro-hats-list"></div>
+      <button class="btn btn-primary" id="introSkipBtn">Got it, let's play →</button>
+    </div>
+  </div>
+  <button id="helpBtn" class="help-fab hidden" aria-label="Show six hats guide">?</button>
+
+  <!-- ===== AUTH SCREEN ===== -->
+  <section id="screen-auth" class="screen">
+    <div class="card auth-card">
+      <h1 class="logo">🎩 Six Hats</h1>
+      <p class="muted">Sharpen thinking. Build teams. Level up.</p>
+      <input id="authName" class="input" placeholder="Your name" />
+      <input id="authPassword" class="input" type="password" placeholder="Password" />
+      <button class="btn btn-primary" id="loginBtn">Log in / Sign up</button>
+      <p id="authError" class="error"></p>
+    </div>
+  </section>
+
+  <!-- ===== HOME / TEAM SELECT ===== -->
+  <section id="screen-home" class="screen hidden">
+    <div class="topbar">
+      <div>
+        <span id="homePlayerName" class="player-name"></span>
+        <span id="homeLevelBadge" class="badge"></span>
+      </div>
+      <button class="btn btn-ghost" id="dashboardBtn">🏆 Leaderboard</button>
+    </div>
+
+    <div class="card">
+      <h2>Play</h2>
+      <div class="mode-row">
+        <button class="btn btn-toggle active" data-mode-type="individual" id="modeIndividualBtn">🧍 Individual</button>
+        <button class="btn btn-toggle" data-mode-type="team" id="modeTeamBtn">👥 Team</button>
+      </div>
+
+      <div id="teamSection" class="hidden">
+        <h3>Choose a team</h3>
+        <div id="teamList" class="team-list"></div>
+        <div class="create-team-row">
+          <input id="newTeamName" class="input" placeholder="New team name" />
+          <button class="btn btn-secondary" id="createTeamBtn">Create team</button>
+        </div>
+      </div>
+
+      <h3>Game mode</h3>
+      <div class="mode-row">
+        <button class="btn btn-toggle active" data-game-mode="puzzle" id="puzzleModeBtn">🧩 Puzzle</button>
+        <button class="btn btn-toggle" data-game-mode="scenario" id="scenarioModeBtn">📜 Scenario</button>
+      </div>
+
+      <h3>Level</h3>
+      <div class="mode-row">
+        <button class="btn btn-toggle active" data-level="easy">Easy</button>
+        <button class="btn btn-toggle" data-level="medium">Medium</button>
+        <button class="btn btn-toggle" data-level="hard">Hard</button>
+      </div>
+
+      <button class="btn btn-primary btn-wide" id="startGameBtn">Create Game</button>
+    </div>
+  </section>
+
+  <!-- ===== LOBBY / ACTIVE GAME (shared face-avatar screen) ===== -->
+  <section id="screen-game" class="screen hidden">
+    <div class="topbar">
+      <span id="gameIdLabel" class="badge"></span>
+      <span id="timerLabel" class="timer">⏱ 2:00</span>
+    </div>
+
+    <div id="scenarioBanner" class="scenario-banner hidden">
+      <strong id="scenarioTitle"></strong>
+      <p id="scenarioText"></p>
+    </div>
+
+    <div id="facesGrid" class="faces-grid"></div>
+
+    <div id="hostControls" class="host-controls hidden">
+      <button class="btn btn-primary btn-wide" id="startRoundBtn">▶ Start Round</button>
+    </div>
+
+    <!-- Puzzle mode play area -->
+    <div id="puzzleArea" class="play-area hidden">
+      <div id="puzzleSentences" class="puzzle-sentences"></div>
+      <div id="hatPicker" class="hat-picker"></div>
+      <button class="btn btn-primary btn-wide" id="submitPuzzleBtn">Submit answers</button>
+    </div>
+
+    <!-- Scenario mode play area -->
+    <div id="scenarioArea" class="play-area hidden">
+      <div id="roleCard" class="role-card"></div>
+      <textarea id="scenarioAnswer" class="input textarea" maxlength="280" placeholder="Type your response through your hat's lens... (max 280 chars)"></textarea>
+      <div id="typingIndicator" class="muted small hidden">a teammate is typing…</div>
+      <button class="btn btn-primary btn-wide" id="submitScenarioBtn">Submit answer</button>
+    </div>
+
+    <!-- Round result / debrief -->
+    <div id="roundResult" class="round-result hidden"></div>
+
+    <div class="game-footer">
+      <button class="btn btn-secondary hidden" id="playAgainBtn">🔁 Play again</button>
+      <button class="btn btn-ghost" id="leaveGameBtn">Leave game</button>
+    </div>
+  </section>
+
+  <!-- ===== DASHBOARD ===== -->
+  <section id="screen-dashboard" class="screen hidden">
+    <div class="topbar">
+      <h2>🏆 Weekly Leaderboard</h2>
+      <button class="btn btn-ghost" id="backHomeBtn">← Back</button>
+    </div>
+    <h3>Individuals</h3>
+    <div id="leaderIndividuals" class="leaderboard"></div>
+    <h3>Teams</h3>
+    <div id="leaderTeams" class="leaderboard"></div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
