@@ -1,0 +1,188 @@
+/* ============ THEME VARIABLES ============
+   Every color used for TEXT or BACKGROUND comes from these variables.
+   This is what guarantees no white-on-white / black-on-black: each
+   theme defines its own --text and --bg that are always contrasting,
+   and every rule below uses the variable, never a hardcoded value. */
+
+:root[data-theme="dark"] {
+  --bg: #14101f;
+  --bg-elevated: rgba(255,255,255,0.06);
+  --card-bg: rgba(255,255,255,0.08);
+  --text: #f5f1ff;
+  --text-muted: #b9aed6;
+  --border: rgba(255,255,255,0.14);
+  --primary: #a78bfa;
+  --primary-text: #1a1024;
+  --accent: #f472b6;
+  --shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f3ff;
+  --bg-elevated: rgba(255,255,255,0.7);
+  --card-bg: rgba(255,255,255,0.85);
+  --text: #241a3d;
+  --text-muted: #6b6086;
+  --border: rgba(36,26,61,0.12);
+  --primary: #7c3aed;
+  --primary-text: #ffffff;
+  --accent: #db2777;
+  --shadow: 0 8px 24px rgba(124,58,237,0.12);
+}
+
+/* Six hat colors — same in both themes, always paired with a fixed
+   contrasting text color (defined per-swatch below), never with --text */
+:root {
+  --hat-white: #f4f4f6;   --hat-white-text: #22222a;
+  --hat-red: #ef4444;     --hat-red-text: #ffffff;
+  --hat-black: #2b2b33;   --hat-black-text: #ffffff;
+  --hat-yellow: #fbbf24;  --hat-yellow-text: #2b2100;
+  --hat-green: #22c55e;   --hat-green-text: #052e12;
+  --hat-blue: #3b82f6;    --hat-blue-text: #ffffff;
+  --radius: 20px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+  padding-bottom: 40px;
+}
+
+.hidden { display: none !important; }
+.muted { color: var(--text-muted); }
+.small { font-size: 0.8rem; }
+.error { color: var(--hat-red); min-height: 1.2em; font-size: 0.85rem; }
+
+.screen { max-width: 480px; margin: 0 auto; padding: 20px 16px 80px; }
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  margin-bottom: 16px;
+}
+
+.auth-card { text-align: center; margin-top: 15vh; }
+.logo { font-size: 2rem; margin-bottom: 4px; }
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 1rem;
+}
+.input::placeholder { color: var(--text-muted); }
+.textarea { min-height: 90px; resize: vertical; font-family: inherit; }
+
+.btn {
+  border: none;
+  border-radius: 16px;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--primary-text); }
+.btn-secondary { background: var(--bg-elevated); color: var(--text); border: 1px solid var(--border); }
+.btn-ghost { background: transparent; color: var(--text-muted); }
+.btn-wide { width: 100%; margin-top: 10px; }
+.btn-toggle { background: var(--bg-elevated); color: var(--text); border: 1px solid var(--border); margin-right: 8px; margin-bottom: 8px; }
+.btn-toggle.active { background: var(--primary); color: var(--primary-text); }
+
+.theme-toggle {
+  position: fixed; top: 14px; right: 14px; z-index: 50;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card-bg); color: var(--text);
+  font-size: 1.1rem; cursor: pointer; box-shadow: var(--shadow);
+}
+
+.help-fab {
+  position: fixed; bottom: 20px; right: 16px; z-index: 40;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--primary); color: var(--primary-text);
+  border: none; font-weight: 800; font-size: 1.1rem; box-shadow: var(--shadow);
+}
+
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+.modal-card { background: var(--card-bg); backdrop-filter: blur(14px); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; max-width: 460px; max-height: 85vh; overflow-y: auto; color: var(--text); box-shadow: var(--shadow); }
+.intro-hats-list { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+.intro-hat-row { display: flex; gap: 10px; align-items: center; padding: 10px; border-radius: 14px; background: var(--bg-elevated); }
+.hat-dot { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+
+.topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.player-name { font-weight: 700; margin-right: 8px; }
+.badge { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; font-size: 0.75rem; color: var(--text-muted); }
+.timer { font-weight: 700; background: var(--bg-elevated); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); }
+
+.mode-row { display: flex; flex-wrap: wrap; margin-bottom: 6px; }
+
+.team-list { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+.team-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px; cursor: pointer; }
+.team-item.selected { outline: 2px solid var(--primary); }
+.create-team-row { display: flex; gap: 8px; }
+.create-team-row .input { margin: 0; }
+
+.scenario-banner { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px; }
+
+/* ===== face avatar grid (lobby + active screen, shared) ===== */
+.faces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 10px 0 18px; }
+.face-tile { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.face {
+  width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; border: 3px solid var(--border);
+  filter: grayscale(1) brightness(0.6);
+  transition: filter 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.face.joined { filter: grayscale(0.85) brightness(0.85); }
+.face.hat-assigned { filter: none; }
+.face.submitted { animation: pop 0.4s ease; }
+.face.disconnected { opacity: 0.35; }
+@keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+.face-name { font-size: 0.72rem; color: var(--text-muted); max-width: 70px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; }
+
+.play-area { margin-top: 10px; }
+
+/* hat picker - colored icons instead of a dropdown */
+.hat-picker { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; justify-content: center; }
+.hat-chip {
+  width: 56px; height: 56px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; cursor: pointer; border: 3px solid transparent;
+  box-shadow: var(--shadow);
+}
+.hat-chip.selected { border-color: var(--text); transform: scale(1.08); }
+
+.puzzle-sentences { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.puzzle-sentence-row { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px; }
+.puzzle-sentence-row .assigned-hat { float: right; font-size: 1.2rem; }
+
+.role-card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 10px; }
+
+.round-result { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-top: 14px; }
+.debrief-row { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.debrief-row:last-child { border-bottom: none; }
+.correct-tag { color: var(--hat-green); font-weight: 700; }
+.incorrect-tag { color: var(--hat-red); font-weight: 700; }
+
+.game-footer { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+
+.leaderboard { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.leader-row { display: flex; justify-content: space-between; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px; }
+.leader-rank { font-weight: 700; color: var(--primary); margin-right: 8px; }
